@@ -2,7 +2,7 @@ import cv2
 import os
 
 pasta_entrada = 'C:\\Users\\steph\\OneDrive\\Documentos\\imagens_originais'
-pasta_saida = 'C:\\Users\\steph\\OneDrive\\Documentos\\imagens_filtros\\suavizacao'
+pasta_saida = 'C:\\Users\\steph\\OneDrive\\Documentos\\imagens_filtros\\suavizacao\\mediana'
 
 os.makedirs(pasta_saida, exist_ok=True)
 

@@ -7,23 +7,26 @@ pasta_saida = 'C:\\Users\\steph\\OneDrive\\Documentos\\imagens_filtros\\suavizac
 os.makedirs(pasta_saida, exist_ok=True)
 
 for nome_arquivo in os.listdir(pasta_entrada):
-
     if not (nome_arquivo.endswith('.jpg') or nome_arquivo.endswith('.png')):
         continue
-    
+
     caminho_entrada = os.path.join(pasta_entrada, nome_arquivo)
-    
+
     imagem = cv2.imread(caminho_entrada)
-    
+
+    # Aplicação dos filtros
     bilateral_blur_color = cv2.bilateralFilter(imagem, 15, 75, 75)
-    
     imagem_gray = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
-    
     bilateral_blur_gray = cv2.bilateralFilter(imagem_gray, 15, 75, 75)
-    
-    nome_colorido = f'bilateral_blur_color_{nome_arquivo}'
-    nome_cinza = f'bilateral_blur_gray_{nome_arquivo}'
-    
+
+    # Nome do arquivo sem a extensão
+    nome_base = os.path.splitext(nome_arquivo)[0]
+
+    # Novos nomes no formato "img x.nome do filtro"
+    nome_colorido = f'{nome_base}.bilateral_blur_color.jpg'
+    nome_cinza = f'{nome_base}.bilateral_blur_gray.jpg'
+
+    # Salvando as imagens
     cv2.imwrite(os.path.join(pasta_saida, nome_colorido), bilateral_blur_color)
     cv2.imwrite(os.path.join(pasta_saida, nome_cinza), bilateral_blur_gray)
 

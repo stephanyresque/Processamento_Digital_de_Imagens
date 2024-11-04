@@ -12,14 +12,22 @@ os.makedirs(pasta_saida, exist_ok=True)
 for nome_arquivo in os.listdir(pasta_entrada):
     if not (nome_arquivo.endswith('.jpg') or nome_arquivo.endswith('.png')):
         continue
-    
+
     caminho_entrada = os.path.join(pasta_entrada, nome_arquivo)
+
     imagem = cv2.imread(caminho_entrada)
-    
+
+    # Aplicação do filtro High Boost
     imagem_suavizada = cv2.GaussianBlur(imagem, (15, 15), 0)
     high_boost = cv2.addWeighted(imagem, fator_boost, imagem_suavizada, -1, offset_brilho)
-    
-    nome_saida = f'high_boost_{nome_arquivo}'
+
+    # Nome do arquivo sem a extensão
+    nome_base = os.path.splitext(nome_arquivo)[0]
+
+    # Novo nome no formato "img x.nome do filtro"
+    nome_saida = f'{nome_base}.high_boost.jpg'
+
+    # Salvando a imagem
     cv2.imwrite(os.path.join(pasta_saida, nome_saida), high_boost)
 
 print("Imagens com filtro High Boost (com ajuste de brilho) processadas e salvas com sucesso!")

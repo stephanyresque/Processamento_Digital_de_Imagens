@@ -13,10 +13,10 @@ for nome_arquivo in os.listdir(pasta_entrada):
     caminho_entrada = os.path.join(pasta_entrada, nome_arquivo)
     imagem = cv2.imread(caminho_entrada)
 
-    # Aplicação dos filtros
-    median_blur_color = cv2.medianBlur(imagem, 15)
+    # Aplicação dos filtros com suavização mínima
+    median_blur_color = cv2.medianBlur(imagem, 5)
     imagem_gray = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
-    median_blur_gray = cv2.medianBlur(imagem_gray, 15)
+    median_blur_gray = cv2.medianBlur(imagem_gray, 5)
 
     # Nome do arquivo sem extensão e a extensão original
     nome_base, extensao = os.path.splitext(nome_arquivo)
